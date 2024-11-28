@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "style": {
+                "type": "string"
+              },
+              "bold": {
+                "type": "boolean"
+              },
+              "italics": {
+                "type": "boolean"
+              },
+              "underline": {
+                "type": "boolean"
+              },
+              "color": {
+                "type": "string"
+              },
+              "fontSize": {
+                "type": "integer"
+              },
+              "alignment": {
+                "type": "string",
+                "enum": ["left", "center", "right", "justify"]
+              },
+              "table": {
+                "type": "object",
+                "properties": {
+                  "headerRows": {
+                    "type": "integer"
+                  },
+                  "body": {
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "required": ["body"]
+              },
+              "image": {
+                "type": "string",
+                "pattern": "^data:image\\/.*;base64,.*$"
+              },
+              "list": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["text"]
+          }
+        ]
+      }
+    },
+    "styles": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9_-]+$": {
+          "type": "object",
+          "properties": {
+            "fontSize": {
+              "type": "integer"
+            },
+            "bold": {
+              "type": "boolean"
+            },
+            "italics": {
+              "type": "boolean"
+            },
+            "underline": {
+              "type": "boolean"
+            },
+            "color": {
+              "type": "string"
+            },
+            "alignment": {
+              "type": "string",
+              "enum": ["left", "center", "right", "justify"]
+            }
+          }
+        }
+      }
+    },
+    "defaultStyle": {
+      "type": "object",
+      "properties": {
+        "fontSize": {
+          "type": "integer"
+        },
+        "bold": {
+          "type": "boolean"
+        },
+        "italics": {
+          "type": "boolean"
+        },
+        "underline": {
+          "type": "boolean"
+        },
+        "color": {
+          "type": "string"
+        },
+        "alignment": {
+          "type": "string",
+          "enum": ["left", "center", "right", "justify"]
+        }
+      }
+    }
+  },
+  "required": ["content"]
+}
